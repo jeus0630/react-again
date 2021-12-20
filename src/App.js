@@ -8,6 +8,8 @@ function App() {
     let [글제목, 글제목변경] = useState(['남자 코트 추천', '강남 우동맛집', '파이썬 독학']);
     let [따봉, 따봉변경] = useState([0,0,0]);
     let [modal, modal변경] = useState(false);
+    let [inputValue, inputValueChange] = useState('');
+
 
     function onClickLikeHandler(idx) {
         const arr = [...따봉];
@@ -24,6 +26,16 @@ function App() {
     function onClickModalHandler(idx) {
         제목변경(글제목[idx]);
         modal변경(!modal);
+    }
+
+    function onChangeInputHandler(val){
+        inputValueChange(val);
+    }
+
+    function onClickBtnHandler(){
+        const arr = [...글제목];
+        arr.push(inputValue);
+        글제목변경(arr);
     }
 
     return (
@@ -43,6 +55,11 @@ function App() {
                     )
                 })
             }
+
+            <div className="publish">
+                <input onChange={(e)=>{onChangeInputHandler(e.target.value)}}/>
+                <button onClick={()=>{onClickBtnHandler();}}>저장</button>
+            </div>
 
             {
                 modal == true
